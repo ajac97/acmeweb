@@ -48,4 +48,14 @@ public class StatusController {
         return new ServerStatus(counter.incrementAndGet(),
                 String.format(template, name), details);
     }
+
+    @RequestMapping("/status/detailed")
+    public ServerStatus handleStatusRequests2(@RequestParam(value = "name", defaultValue = "Anonymous") String name,
+                                             @RequestParam(value = "details", defaultValue ="") List<String> details) {
+        if (!details.isEmpty()) {
+            logger.info("Details were provided: " + details);
+        }
+        return new ServerStatus(counter.incrementAndGet(),
+                String.format(template, name), details);
+    }
 }

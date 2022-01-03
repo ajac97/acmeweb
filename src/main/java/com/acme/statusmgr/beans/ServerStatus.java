@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * A POJO that represents Server Status and can be returned as the result of a request.
  */
-public class ServerStatus {
+public class ServerStatus implements ServerStatusInterface{
 
     private long id;
     private String contentHeader;
@@ -66,6 +66,5 @@ public class ServerStatus {
     public List<String> getDetails() {
         return details;
     }
-
 
 }
