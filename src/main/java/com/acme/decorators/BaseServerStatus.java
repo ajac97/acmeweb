@@ -4,6 +4,10 @@ import com.acme.facades.FacadeInterface;
 
 import java.util.List;
 
+/**
+ * This is a class that represents the basic server status object that is intended to be decorated by decorators that
+ * extend this class.
+ */
 
 public abstract class BaseServerStatus {
     protected static long id;
@@ -31,11 +35,19 @@ public abstract class BaseServerStatus {
 
     public abstract String getStatusDesc();
 
+    /**
+     * Returns the auto incremented ID for each refresh of the web page.
+     * @return
+     */
     public long getId() {
         return id;
     }
 
 
+    /**
+     * This sets the implementation of the facade class that is to be used when running the server.
+     * @param facadeInterface
+     */
 
     public static void setFacade(FacadeInterface facadeInterface) {
         facade = facadeInterface;

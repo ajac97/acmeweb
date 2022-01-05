@@ -1,5 +1,11 @@
 package com.acme.decorators;
 
+/**
+ * This class is a decorator for the BaseServerStatus class. Hence it extends BaseServerStatus. It decorates status
+ * desctiprion to return the total memory of the system.
+ */
+
+
 public class TotalMemoryDecorator extends BaseServerStatus {
 
     private BaseServerStatus objToDecorate;

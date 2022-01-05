@@ -54,6 +54,10 @@ public class ServerStatusControllerTests {
                 .andExpect(jsonPath("$.contentHeader").value("Server Status requested by RebYid"));
     }
 
+    /**
+     * this tests for when the user passes in the all of the valid details
+     * @throws Exception
+     */
     @Test
     public void allDetailsProvidedTest() throws Exception {
         this.mockMvc.perform(get("/server/status/detailed")
@@ -66,6 +70,10 @@ public class ServerStatusControllerTests {
                         "C:\\Users\\Akiva Jacobson\\AppData\\Local\\Temp"));
     }
 
+    /**
+     * this tests for when the user enters an invalid detail
+     * @throws Exception
+     */
     @Test
     public void invalidDetailsProvided() throws Exception {
         this.mockMvc.perform(get("/server/status/detailed")
@@ -73,6 +81,11 @@ public class ServerStatusControllerTests {
                         .param("details", "availableProcessors,junkERROR"))
                 .andDo(print()).andExpect(status().isBadRequest()).andExpect(status().reason(is("Invalid detail requested.")));
     }
+
+    /**
+     * this tests for when the user enters duplicate valid details
+     * @throws Exception
+     */
     @Test
     public void repeatedDetailsProvided() throws Exception {
         this.mockMvc.perform(get("/server/status/detailed")
@@ -83,9 +96,11 @@ public class ServerStatusControllerTests {
                         "processors available, and there are 5 processors available"));
     }
 
-
-
-
+    /**
+     * this ensures that the FacadeInterface implementation that is used
+     * during testing is the MockFacade implementation so that all
+     * results are constant and easily testable. This is DIP compliant.
+     */
     @BeforeAll
     public static void setFacadeMock(){
         BaseServerStatus.setFacade(new MockFacade());
