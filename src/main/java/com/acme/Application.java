@@ -1,6 +1,7 @@
 package com.acme;
 
-import com.acme.statusmgr.StatusController;
+import com.acme.decorators.BaseServerStatus;
+import com.acme.facades.SystemFacade;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

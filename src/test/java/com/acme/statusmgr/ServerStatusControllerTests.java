@@ -15,10 +15,10 @@
  */
 package com.acme.statusmgr;
 
-import com.acme.BaseServerStatus;
-import com.acme.MockFacade;
+import com.acme.decorators.BaseServerStatus;
+import com.acme.facades.MockFacade;
 import static org.hamcrest.Matchers.is;
-import com.acme.statusmgr.beans.ServerStatus;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

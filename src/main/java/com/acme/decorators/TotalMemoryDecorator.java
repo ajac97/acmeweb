@@ -1,4 +1,4 @@
-package com.acme;
+package com.acme.decorators;
 
 public class TotalMemoryDecorator extends BaseServerStatus {
 

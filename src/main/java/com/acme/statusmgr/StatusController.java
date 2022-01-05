@@ -1,7 +1,7 @@
 package com.acme.statusmgr;
 
-import com.acme.*;
 import com.acme.statusmgr.beans.ServerStatus;
+import com.acme.decorators.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

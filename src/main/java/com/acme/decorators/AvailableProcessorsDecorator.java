@@ -1,4 +1,4 @@
-package com.acme;
+package com.acme.decorators;
 
 public class AvailableProcessorsDecorator extends BaseServerStatus {
     private BaseServerStatus objToDecorate;

@@ -1,4 +1,4 @@
-package com.acme;
+package com.acme.facades;
 
 public class MockFacade implements FacadeInterface{
     @Override

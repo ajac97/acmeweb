@@ -1,4 +1,4 @@
-package com.acme;
+package com.acme.decorators;
 
 public class AvailableMemoryDecorator extends BaseServerStatus {
     private BaseServerStatus toDecorate;

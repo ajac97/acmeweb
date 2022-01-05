@@ -1,6 +1,6 @@
-package com.acme;
+package com.acme.decorators;
 
-import com.acme.FacadeInterface;
+import com.acme.facades.FacadeInterface;
 
 import java.util.List;
 

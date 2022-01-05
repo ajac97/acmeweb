@@ -1,8 +1,7 @@
 package com.acme.statusmgr.beans;
 
-import com.acme.*;
 import com.acme.servermgr.ServerManager;
-import com.acme.BaseServerStatus;
+import com.acme.decorators.BaseServerStatus;
 
 import java.util.List;
 
