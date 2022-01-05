@@ -37,8 +37,8 @@ public abstract class BaseServerStatus {
 
 
 
-    public void setFacade(FacadeInterface facade) {
-        this.facade = facade;
+    public static void setFacade(FacadeInterface facadeInterface) {
+        facade = facadeInterface;
     }
 
 

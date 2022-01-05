@@ -60,7 +60,6 @@ public class StatusController {
 
         ServerStatus status = new ServerStatus(counter.incrementAndGet(),
                 String.format(template, name), details);
-        status.setFacade(new SystemFacade());
         return decorate(status, details);
 
     }
@@ -77,6 +76,7 @@ public class StatusController {
                 default -> throw new BadRequestException();
             }
         }
+
         return decorated;
     }
 
