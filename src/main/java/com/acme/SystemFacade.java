@@ -1,7 +1,7 @@
 package com.acme;
 
 public class SystemFacade implements FacadeInterface{
-    Runtime rt = Runtime.getRuntime();
+    private Runtime rt = Runtime.getRuntime();
     @Override
     public int getAvailProcessors() {
         return rt.availableProcessors();
