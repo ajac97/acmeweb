@@ -2,6 +2,9 @@ package com.acme.statusmgr.beans;
 
 import com.acme.servermgr.ServerManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A POJO that represents Server Status and can be returned as the result of a request.
  */
@@ -10,6 +13,7 @@ public class ServerStatus {
     private long id;
     private String contentHeader;
     private String statusDesc = "Unknown";
+    private List<String> details;
 
     /**
      * Construct a ServerStatus using info passed in for identification, and obtaining current
@@ -19,9 +23,10 @@ public class ServerStatus {
      * @param id            a numeric identifier/counter of which request this is
      * @param contentHeader info about the request
      */
-    public ServerStatus(long id, String contentHeader) {
+    public ServerStatus(long id, String contentHeader, List<String> details) {
         this.id = id;
         this.contentHeader = contentHeader;
+        this.details = details;
 
         // Obtain current status of server
         this.statusDesc = "Server is " + ServerManager.getCurrentServerStatus();
@@ -56,6 +61,10 @@ public class ServerStatus {
      */
     public String getStatusDesc() {
         return statusDesc;
+    }
+
+    public List<String> getDetails() {
+        return details;
     }
 
 
