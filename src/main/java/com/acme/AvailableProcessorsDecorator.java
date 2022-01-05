@@ -8,6 +8,6 @@ public class AvailableProcessorsDecorator extends BaseServerStatus {
     }
     @Override
     public String getStatusDesc() {
-        return objToDecorate.getStatusDesc() + ", and there are " + facade.getAvailProcessors() + "  processors available";
+        return objToDecorate.getStatusDesc() + ", and there are " + facade.getAvailProcessors() + " processors available";
     }
 }

@@ -17,6 +17,7 @@ package com.acme.statusmgr;
 
 import com.acme.BaseServerStatus;
 import com.acme.MockFacade;
+import static org.hamcrest.Matchers.is;
 import com.acme.statusmgr.beans.ServerStatus;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -60,10 +61,30 @@ public class ServerStatusControllerTests {
                         .param("details", "availableProcessors,freeJVMMemory,totalJVMMemory,jreVersion,tempLocation"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.statusDesc").value("Server is up, and there are 5 " +
-                        " processors available, and there are 6 bytes of JVM memory free, and there is a total of 7 " +
+                        "processors available, and there are 6 bytes of JVM memory free, and there is a total of 7 " +
                         "bytes of JVM memory, and the JRE version is 17, and the server's temp file location is " +
                         "C:\\Users\\Akiva Jacobson\\AppData\\Local\\Temp"));
     }
+
+    @Test
+    public void invalidDetailsProvided() throws Exception {
+        this.mockMvc.perform(get("/server/status/detailed")
+                        .param("name", "RebYid")
+                        .param("details", "availableProcessors,junkERROR"))
+                .andDo(print()).andExpect(status().isBadRequest()).andExpect(status().reason(is("Invalid detail requested.")));
+    }
+    @Test
+    public void repeatedDetailsProvided() throws Exception {
+        this.mockMvc.perform(get("/server/status/detailed")
+                        .param("name", "RebYid")
+                        .param("details", "availableProcessors,availableProcessors"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.statusDesc").value("Server is up, and there are 5 " +
+                        "processors available, and there are 5 processors available"));
+    }
+
+
+
 
     @BeforeAll
     public static void setFacadeMock(){
