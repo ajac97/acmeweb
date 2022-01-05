@@ -1,5 +1,7 @@
 package com.acme;
 
+import com.acme.decorators.BaseServerStatus;
+import com.acme.facades.SystemFacade;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,7 +11,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Application {
 
+    /**
+     * This will set the FacadeInterface implementation to be used
+     * when actually running the server.
+     * @param args
+     */
     public static void main(String[] args) {
+        BaseServerStatus.setFacade(new SystemFacade());
         SpringApplication.run(Application.class, args);
     }
 }

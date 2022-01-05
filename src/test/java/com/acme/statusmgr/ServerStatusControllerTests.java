@@ -15,6 +15,11 @@
  */
 package com.acme.statusmgr;
 
+import com.acme.decorators.BaseServerStatus;
+import com.acme.facades.MockFacade;
+import static org.hamcrest.Matchers.is;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -47,6 +52,58 @@ public class ServerStatusControllerTests {
         this.mockMvc.perform(get("/server/status").param("name", "RebYid"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.contentHeader").value("Server Status requested by RebYid"));
+    }
+
+    /**
+     * this tests for when the user passes in the all of the valid details
+     * @throws Exception
+     */
+    @Test
+    public void allDetailsProvidedTest() throws Exception {
+        this.mockMvc.perform(get("/server/status/detailed")
+                        .param("name", "RebYid")
+                        .param("details", "availableProcessors,freeJVMMemory,totalJVMMemory,jreVersion,tempLocation"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.statusDesc").value("Server is up, and there are 5 " +
+                        "processors available, and there are 6 bytes of JVM memory free, and there is a total of 7 " +
+                        "bytes of JVM memory, and the JRE version is 17, and the server's temp file location is " +
+                        "C:\\Users\\Akiva Jacobson\\AppData\\Local\\Temp"));
+    }
+
+    /**
+     * this tests for when the user enters an invalid detail
+     * @throws Exception
+     */
+    @Test
+    public void invalidDetailsProvided() throws Exception {
+        this.mockMvc.perform(get("/server/status/detailed")
+                        .param("name", "RebYid")
+                        .param("details", "availableProcessors,junkERROR"))
+                .andDo(print()).andExpect(status().isBadRequest()).andExpect(status().reason(is("Invalid detail requested.")));
+    }
+
+    /**
+     * this tests for when the user enters duplicate valid details
+     * @throws Exception
+     */
+    @Test
+    public void repeatedDetailsProvided() throws Exception {
+        this.mockMvc.perform(get("/server/status/detailed")
+                        .param("name", "RebYid")
+                        .param("details", "availableProcessors,availableProcessors"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.statusDesc").value("Server is up, and there are 5 " +
+                        "processors available, and there are 5 processors available"));
+    }
+
+    /**
+     * this ensures that the FacadeInterface implementation that is used
+     * during testing is the MockFacade implementation so that all
+     * results are constant and easily testable. This is DIP compliant.
+     */
+    @BeforeAll
+    public static void setFacadeMock(){
+        BaseServerStatus.setFacade(new MockFacade());
     }
 
 }

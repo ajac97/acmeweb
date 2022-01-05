@@ -1,20 +1,18 @@
 package com.acme.statusmgr.beans;
 
 import com.acme.servermgr.ServerManager;
+import com.acme.decorators.BaseServerStatus;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A POJO that represents Server Status and can be returned as the result of a request.
  */
-public class ServerStatus {
-
-    private long id;
+public class ServerStatus extends BaseServerStatus {
+    /*private long id;
     private String contentHeader;
     private String statusDesc = "Unknown";
-    private List<String> details;
-
+    private List<String> details;*/
     /**
      * Construct a ServerStatus using info passed in for identification, and obtaining current
      * server status from the appropriate Manager class.
@@ -23,6 +21,8 @@ public class ServerStatus {
      * @param id            a numeric identifier/counter of which request this is
      * @param contentHeader info about the request
      */
+
+
     public ServerStatus(long id, String contentHeader, List<String> details) {
         this.id = id;
         this.contentHeader = contentHeader;
@@ -30,6 +30,7 @@ public class ServerStatus {
 
         // Obtain current status of server
         this.statusDesc = "Server is " + ServerManager.getCurrentServerStatus();
+
     }
 
     public ServerStatus() {
@@ -41,31 +42,18 @@ public class ServerStatus {
      *
      * @return a numeric id that increases during life of server for each request .
      */
-    public long getId() {
-        return id;
-    }
 
-    /**
-     * Get the content header that was specified by the request
-     *
-     * @return some string
-     */
-    public String getContentHeader() {
-        return contentHeader;
-    }
-
-    /**
-     * Get an english-like description of the server's status
-     *
-     * @return A string describing status
-     */
+    @Override
     public String getStatusDesc() {
         return statusDesc;
     }
 
+
+
     public List<String> getDetails() {
         return details;
     }
+
 
 
 }
